@@ -23,6 +23,12 @@
 
 #include "utimer.h"
 
+// Define the global variables for the test executable
+GMainLoop         *loop = NULL;
+gboolean          paused = FALSE;
+struct termios    savedttystate;
+Config            ut_config;
+
 //~ static    char            **remaining_args;
 static ut_timer        *ttimer;
 static gchar           *timer_info, *countdown_info;
@@ -161,7 +167,12 @@ int main (int argc, char *argv[])
   tcgetattr(STDIN_FILENO, &savedttystate); /* Save current tty state  */
   
   g_thread_init (NULL);
+
+#if !GLIB_CHECK_VERSION(2,36,0)
+  /* This function is deprecated in newer versions of GLib */
   g_type_init ();
+#endif
+
   init_config (&ut_config);
   
   /* We cleanup at exit */

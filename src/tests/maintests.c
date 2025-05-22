@@ -32,6 +32,12 @@
 #include <glib-object.h>
 #include "../utimer.h"
 
+// Define the global variables for the test executable
+GMainLoop         *loop = NULL;
+gboolean          paused = FALSE;
+struct termios    savedttystate;
+Config            ut_config;
+
 #define TEST_DURATION_MAX_OFFSET_MSECONDS 100
 
 /**

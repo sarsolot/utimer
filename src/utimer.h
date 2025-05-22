@@ -66,9 +66,10 @@
 #define TIMER_PRINT_RATE_MSEC  79
 #define TIMER_CHECK_RATE_MSEC  500
 
-GMainLoop         *loop;
-gboolean          paused;
-struct termios    savedttystate;
-Config            ut_config;
+/* Use extern to declare global variables without defining them */
+extern GMainLoop         *loop;
+extern gboolean          paused;
+extern struct termios    savedttystate;
+extern Config            ut_config;
 
 #endif /* UTIMER_H */
