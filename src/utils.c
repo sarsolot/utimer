@@ -127,12 +127,12 @@ gboolean apply_suffix (guint *value, gchar *suffix)
 gboolean start_thread_exit_check (ut_timer* timer)
 {
   GError  *error = NULL;
+  GThread *thread;
   
   g_debug ("Starting thread exit check");
-  if (!g_thread_create ((GThreadFunc) check_exit_from_user, NULL, FALSE, &error))
-  {
-    g_printerr (_("Thread creation failed: %s"), error->message);
-    g_error_free (error);
+  thread = g_thread_new ("exit_check", (GThreadFunc) check_exit_from_user, NULL);
+  if (!thread) {
+    g_printerr (_("Thread creation failed"));
     timer_stop_checkloop_thread (timer);
   }
   
@@ -217,7 +217,7 @@ void success_quitloop ()
 int check_exit_from_user ()
 {
   set_tty_canonical (1);             /* Apply canonical mode to TTY*/
-  g_atexit (reset_tty_canonical_mode); /* Deactivate canonical mode at exit */
+  atexit (reset_tty_canonical_mode); /* Deactivate canonical mode at exit */
   
   gint c;
   do

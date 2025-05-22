@@ -166,7 +166,10 @@ int main (int argc, char *argv[])
   
   tcgetattr(STDIN_FILENO, &savedttystate); /* Save current tty state  */
   
+#if !GLIB_CHECK_VERSION(2,32,0)
+  /* This function is deprecated in newer versions of GLib */
   g_thread_init (NULL);
+#endif
 
 #if !GLIB_CHECK_VERSION(2,36,0)
   /* This function is deprecated in newer versions of GLib */
@@ -176,7 +179,7 @@ int main (int argc, char *argv[])
   init_config (&ut_config);
   
   /* We cleanup at exit */
-  g_atexit (clean_up);
+  atexit (clean_up);
   
   /* Define localization */
   ut_config.locale = setlocale (LC_ALL, "");

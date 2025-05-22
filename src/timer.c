@@ -190,17 +190,19 @@ gboolean timer_stop_checkloop_thread (ut_timer *t)
 gboolean timer_run_checkloop_thread (ut_timer *t)
 {
   GError  *error = NULL;
+  GThread *thread;
   
-  g_debug ("Starting Timer thread");
+  g_debug ("Starting timer_run_checkloop_thread...");
   
-  if (!g_thread_create((GThreadFunc) timer_check_loop, t, FALSE, &error))
+  thread = g_thread_new("timer_check", (GThreadFunc) timer_check_loop, t);
+  if (!thread)
   {
-    g_printerr (_("Thread failed: %s"), error->message);
-    g_error_free (error);
-    error_quitloop ();
+    g_printerr (_("Thread creation failed"));
+    t->error_callback();
+    return FALSE;
   }
   
-  return FALSE; // return FALSE to get removed from the main loop
+  return FALSE; // to get removed from the main loop
 }
 
 gchar* timer_get_maximum_time ()
@@ -337,8 +339,8 @@ gchar* timer_ut_timer_to_string (ut_timer *g)
 ut_timer* timer_new (guint seconds,
                      guint mseconds,
                      timer_mode mode,
-                     GVoidFunc success_callback,
-                     GVoidFunc error_callback,
+                     TimerCallbackFunc success_callback,
+                     TimerCallbackFunc error_callback,
                      GTimer* timer)
 {
   if (!timer)
@@ -361,8 +363,8 @@ ut_timer* timer_new (guint seconds,
 
 ut_timer* timer_new_timer (guint seconds,
                            guint mseconds,
-                           GVoidFunc success_callback,
-                           GVoidFunc error_callback,
+                           TimerCallbackFunc success_callback,
+                           TimerCallbackFunc error_callback,
                            GTimer* timer)
 {
   return timer_new (seconds, mseconds, TIMER_MODE_TIMER, success_callback, error_callback, timer);
@@ -370,15 +372,15 @@ ut_timer* timer_new_timer (guint seconds,
 
 ut_timer* countdown_new_timer (guint seconds,
                                guint mseconds,
-                               GVoidFunc success_callback,
-                               GVoidFunc error_callback,
+                               TimerCallbackFunc success_callback,
+                               TimerCallbackFunc error_callback,
                                GTimer* timer)
 {
   return timer_new (seconds, mseconds, TIMER_MODE_COUNTDOWN, success_callback, error_callback, timer);
 }
 
-ut_timer* stopwatch_new_timer (GVoidFunc success_callback,
-                               GVoidFunc error_callback,
+ut_timer* stopwatch_new_timer (TimerCallbackFunc success_callback,
+                               TimerCallbackFunc error_callback,
                                GTimer* timer)
 {
   return timer_new (0, 0, TIMER_MODE_STOPWATCH, success_callback, error_callback, timer);

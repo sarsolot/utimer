@@ -45,12 +45,20 @@ typedef struct
   GTimer        *gtimer;
   guint         seconds;
   guint         mseconds;
-  GVoidFunc     success_callback;
-  GVoidFunc     error_callback;
+  void          (*success_callback)(void);
+  void          (*error_callback)(void);
   guint         timer_print_source_id;
   timer_mode    mode;
   gboolean      checkloop_thread_stop_with_error;
 } ut_timer;
+
+#if GLIB_CHECK_VERSION(2,32,0)
+/* In newer GLib versions, define our own replacement */
+typedef void (*TimerCallbackFunc)(void);
+#else
+/* In older versions, just use the original type */
+typedef GVoidFunc TimerCallbackFunc;
+#endif
 
 gboolean              timer_print               (ut_timer *t);
 gboolean              timer_check               (ut_timer *t);
@@ -66,15 +74,15 @@ gchar*                timer_ut_timer_to_string  (ut_timer *g);
 gchar*                timer_gtvaldiff_to_string (GTimeValDiff g);
 ut_timer*             timer_new_timer           (guint seconds,
                                                  guint mseconds,
-                                                 GVoidFunc success_callback,
-                                                 GVoidFunc error_callback,
+                                                 TimerCallbackFunc success_callback,
+                                                 TimerCallbackFunc error_callback,
                                                  GTimer* timer);
 ut_timer*             countdown_new_timer       (guint seconds,
                                                  guint mseconds,
-                                                 GVoidFunc success_callback,
-                                                 GVoidFunc error_callback,
+                                                 TimerCallbackFunc success_callback,
+                                                 TimerCallbackFunc error_callback,
                                                  GTimer* timer);
-ut_timer*             stopwatch_new_timer       (GVoidFunc success_callback,
-                                                 GVoidFunc error_callback,
+ut_timer*             stopwatch_new_timer       (TimerCallbackFunc success_callback,
+                                                 TimerCallbackFunc error_callback,
                                                  GTimer* timer);
 #endif /* TIMER_H */
