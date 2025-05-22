@@ -1,0 +1,271 @@
+2009-12-17  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Lowered requirements for glib-2.0 to 2.16.6 and intltool to 0.37.1
+	* Added signal.h as include to compile fine on a "lower-requirements machine"
+
+2009-06-01  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Previous commit was release 0.3
+	* Bumped version to 0.4
+
+2009-06-01  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Minor changes in README.in and utimer.1
+
+2009-06-01  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Introduced testing units (using Glib testing)
+	- Run 'make test' to run tests
+	- Added a Makefile.decl
+	- Added gobject-2.0 to the modules needed when building (PKG_CHECK_MODULES)
+	- Tests are in src/tests/
+	* Merged ut_config.h into utils.{h,c}
+	* ut_config is now initialized and freed using init_config() and free_config()
+	* Created new function that sets up the log handler (setup_log_handler())
+	* timer_get_diff now uses ut_timer* as parameter (instead of Gtimer)
+	* Renamed timer_apply_suffix to apply_suffix
+	* Moved functions to utils.{c,h}:
+	- apply_suffix
+	- start_thread_exit_check
+	- set_tty_canonical
+	- reset_tty_canonical_mode
+	- quitloop
+	- error_quitloop
+	- success_quitloop
+	- check_exit_from_user
+	* ut_timer*->start_timer is now ut_timer*->gtimer
+	* parse_time_pattern now returns the seconds and mseconds through the given parameters
+	* Reduced code for ut_timer creations (timer_new_*()...)
+	* ut_timer creations functions now take parameters to help creating the ut_timer
+	* Moved some ut_config variables to static variables in utimer.c
+	* start_thread_exit_check now needs a ut_timer* as parameter
+	* exit_status_code is now ut_config.current_exit_status_code
+
+2009-05-29  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Removed periods from options list.
+	* Also check for uppercase 'Q' instead of only the lowercase 'q'.
+
+2009-05-29  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added stopwatch features: (LP: #379425)
+	- Modified utimer.1 accordingly
+	- Modified README.in accordingly
+	* ut_timer now uses mode variable to store current mode (stopwatch/timer/countdown)
+	* Added ut_config.{isCountdown,isTimer} to clean_up function.
+	* some cleanup in utimer.1
+	* Minor code cleanup
+
+2009-05-26  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Some more indenting
+
+2009-05-26  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Some indenting / code styling.
+
+2009-05-26  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Fixed countdown not working (stops at start)
+
+2009-05-23  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added possibility to pause the timer using the spacebar.
+	* Changed manpage according to above change.
+	* Now prefer using ut_timer* instead of ut_timer directly.
+	* timer_init is now timer_new_timer and returns a pointer to ut_timer.
+	* countdown_init is now countdown_new_timer and returns a pointer to ut_timer.
+	* Added a cleanup function that is called with atexit().
+	* loop is now freed when calling quitloop.
+
+2009-05-22  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Changed method to calculate elapsed time (now completely rely on GTimers)
+	* Moved static functions/variables to the top of appropriate files. (in src/timer.c and src/utimer.c)
+	* Renamed timer_sleep -> timer_check_loop
+	* Renamed timer_start_thread -> timer_run_checkloop_thread
+	* Moved TIMER_REFRESH_RATE to utimer.h (instead of timer.h)
+	* Renamed update_timer_safe_source_id -> timer_print_source_id (for ut_timer struct)
+	* Better indents for some functions declarations in timer.h
+	* Now buffered output is also deactivated when using --debug
+	* Removed obsolete check for escape key
+
+2009-05-21  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Removed non-meaningful stability from configure.ac and README.in
+	* Removed obsolete commented line from configure.ac
+	* Bumped version (better method of bumping version)
+
+2009-05-21  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added --enable-debug=[no/minimal/yes] option to configure
+
+2009-01-23  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Release 0.2.1
+
+2009-01-22  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added some files to Makefile.am EXTRA_DIST for when "making dist"
+
+2009-01-22  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Changed copyrights to add year 2009.
+
+2009-01-22  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Changed configure.ac Version: added ~trunk to differentiate trunk checkouts with dist releases.
+	* Minor Changes in utimer.1, README.in.
+
+2009-01-21  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Removed Translations for now. We don't have enough translators.
+
+2008-12-31  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Better bugfix for the canonical mode still being on at exit (LP: #312727)
+	* Canonical mode is now activated at a later time and now uses atexit to deactivate itself.
+
+2008-12-31  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added and updated locales (still need some more translations though)
+	* Added po/*.po.old to bzrignore
+	* Updated po/update_po_files_from_pot.sh to avoid fuzzy translations
+	* Updated some texts in src/utimer.c
+
+2008-12-31  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Fixes the canonical mode being still on when program ends. (LP: #312727)
+
+2008-12-30  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added Countdown feature.
+	* Removed countdown.{c,h} (no real use)
+	* Changed README.in to add information about the countdown
+	* Changed version to 0.2, codename to 'hourglass' in configure.ac
+	* Added --quiet option, and added some short option alternatives to some long options (e.g. added -L for limits)
+	* Changed gulong into guint. No real need to have gulong plus the sleep function uses guint.
+	* Removed strtodouble(), TimeUnit, and strtodouble_error: Obsolete.
+	* Changed (non-major) order for the whole process in utimer.c.
+	* Added a space between 'function' and '()' in utimer.c functions.
+	* Changed order in option entries.
+
+2008-12-22  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added countdown.{h,c} to src/Makefile.am
+	* Added some includes to countdown.c
+	* Timer: Now use the GTimer struct to show elapsed time
+	* Timer: No more need to be thread-safe:
+	- removed now obsolete timer_update_safe()
+	- removed g_mutex in timer_update()
+	* Timer: Now substracts time already spent until sleep happens to user-given sleep time (to be more accurate)
+	* Timer: timer_get_diff() got simplified thanks to GTimer.
+	* Timer: Removed obsolete timer_get_maximum_value() and timer_get_maximum_value()
+	* Changed timer_parse_pattern into parse_time_pattern for later changes
+	* Timer: Removed now obsolete last_diff from ut_timer struct
+	* Removed year 2038 bug warning (we'll all have 64bits computer by that time!)
+	* Timer: g_timeout_add now uses timer_update() intead of timer_update_safe()
+
+2008-12-19  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added '-c' option for the countdown mode.
+	* Added files countdown.{h,c} but empty for now.
+
+2008-12-18  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Fixed building errors with LOCALEDIR.
+	* Changed "not available in 0.1" into 0.1.x in Readme and man page (utimer.1)
+	* Changed version to 0.1.1.
+
+2008-12-18  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Removed ChangeLog: should only be generated for dist files (.tar.gz)
+	* Changed autogen.sh to create an empty ChangeLog to compile properly if package has been taken from bzr
+
+2008-12-18  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Changed README.in to add requirements
+
+2008-12-18  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added fr locale.
+	* Changed localedir to make locales work.
+	* Added gmo to bzr ignore list.
+
+2008-12-08  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Removed README from package, but Added README.in to generate it from a template (had to had it to EXTRA_DIST now)
+	* Ignored *.pot, README, and utimer-*.tar.gz in .bzrignore
+	* Added man page (data/utimer.1)
+	* Added data directory to Makefile.am
+	* Remove Makefile.in from make distclean
+	* Configure.ac: Change bug report addresse email, added Defines (codename, stability) (and changes for README and data/)
+	* Added Makefile.am for data/
+	* Added script to update po files from a *.pot. (update_po_files_from_pot.sh)
+	* Fixed src/Makefile.am (logs.h => log.h)
+	* Added a few gettext function _() to the source code for i18n
+	* Changed po/POTFILES.in for above change
+
+2008-12-06  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added lots of README information
+	* Added myself to AUTHORS list
+	* Added copyright information in --version
+
+2008-12-06  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added Doxyfile for generating documentation (not really used yet, just trying)
+	* Added ./docs to bzrignore (no need to do versionning of generated docs)
+	* Added log system (log.c and log.h)
+	* Added config structure to hold the important runtime settings (ut_config.h)
+	* Moved a couple functions to the end of timer.c (so that we have main() at the top)
+	* Added --version, --debug, --show-limits (see --help)
+	* Now debug output will only show when using --debug
+	* Removed the arguments check (not needed now)
+	* Timer: Added a timer_update_safe function (that might become obsolete)
+	* Timer: Added a mutex to timer_update function to make it thread safe (just making sure)
+	* Timer: Now Removes the update_timer_safe timeout-function from the main loop when sleep is done
+	* Timer: Now when received a signal, the program exits with an error exit status code (non-zero).
+	* Fixed a few memory leaks.
+	* Added a few comments to some functions
+	* Added a copyright text for --version
+	* Added possibility to pass an error code to quitloop()
+	* Added possibility to exit with success exit status code when quitting with hitting the 'q' key
+
+2008-12-04  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Fixed a few errors that kept from making (GTimeValDiff before ut_timer, and last_diff pointer assignment)
+	= Now it is working as expected.
+
+2008-12-04  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Removed binary src/utimer from repository, and added to .bzrignore
+	* Removed some no more useful comments
+	* Changed some printf formats (%ld into %lu for gulong)
+
+2008-12-04  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added utils.h and utils.c for a few utility functions.
+	* Timer: Added an overflow check when calculating time delta (see timer_update() and timer_get_diff()).
+	* Timer: Changed names for a couple functions in timer.c/h.
+	* Timer: New format for the elapsed time, more human readable.
+	* Timer: Added parser for time length argument (e.g. parsing: 5h10m38s540ms)
+	* Timer: Added last_diff in ut_timer struct for stats (for later rev.)
+	* Removed the 20 seconds quitloop in utimer.c (kept from stopping program after 20s)
+	= This revision is usable/working. For example, try: utimer -t 1m20s450ms
+
+2008-12-03  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Added timer.c and timer.h to makefile.am for the timer feature (try with: timer -t 5)
+	* The threads are now started when the loop is started (so we can "really" quit the loop when done)
+	* Added support for milliseconds sleep (micro-seconds wouldn't be accurate enough)
+	* Other minor changes
+
+2008-12-02  Arnaud Soyez  <weboide@codealpha.net>
+
+	* Initial commit:
+	- Package structure (configure.am/makefile.am files, po, m4, src/, ...)
+	- Using an "autogen.sh" file to prepare the package for compiling with make
+	- Introduce basic code (none of the features are implemented yet)
+	- This revision is not usable yet.
+
