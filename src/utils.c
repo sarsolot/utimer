@@ -220,9 +220,33 @@ int check_exit_from_user ()
   atexit (reset_tty_canonical_mode); /* Deactivate canonical mode at exit */
   
   gint c;
+  fd_set input_set;
+  struct timeval timeout;
+
   do
   {
+    /* Set up the file descriptor set */
+    FD_ZERO(&input_set);
+    FD_SET(STDIN_FILENO, &input_set);
+
+    /* Set up the timeout - check every 0.5 seconds */
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 500000;
+
+    /* Wait for input with timeout */
+    int ready = select(STDIN_FILENO + 1, &input_set, NULL, NULL, &timeout);
+
+    /* Check if we got an error or timeout */
+    if (ready <= 0) {
+      if (ready < 0 && errno == EINTR) quitloop ( EXIT_SUCCESS ); /* Interrupted by signal */
+      continue; /* Timeout or error, try again */
+    }
+
+    /* Input is available */
     c = fgetc (stdin);
+    if (c == EOF)
+      continue;
+
     g_print ("\b ");
     switch (c)
     {
@@ -239,10 +263,9 @@ int check_exit_from_user ()
           paused = TRUE;
         }
       }
-      
     }
   } while (c != 'q' && c != 'Q'); /* checks for 'q' key */
-  
+
   /* If the user asks for exiting, we stop the loop. */
   quitloop ( (ut_config.quit_with_success ? EXIT_SUCCESS : EXIT_FAILURE) );
 }
