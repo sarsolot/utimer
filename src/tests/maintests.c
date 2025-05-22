@@ -227,8 +227,15 @@ gint main (gint argc, gchar *argv[])
   // initialize test program
   g_test_init (&argc, &argv, NULL);
   
+#if !GLIB_CHECK_VERSION(2,32,0)
+  /* This function is deprecated in newer versions of GLib */
   g_thread_init (NULL);
+#endif
+
+#if !GLIB_CHECK_VERSION(2,36,0)
+  /* This function is deprecated in newer versions of GLib */
   g_type_init ();
+#endif
   
   // set verbosity
   ut_config.verbose = g_test_verbose();

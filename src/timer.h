@@ -67,7 +67,13 @@ gboolean              timer_run_checkloop_thread(ut_timer *t);
 gboolean              parse_time_pattern        (gchar *pattern, guint *seconds, guint *mseconds);
 void                  timer_add_seconds         (ut_timer* timer, guint seconds);
 void                  timer_add_milliseconds    (ut_timer* timer, guint milliseconds);
+#if GLIB_CHECK_VERSION(2,62,0)
+/* Modern GLib version - use GDateTime */
+GDateTime*            gtvaldiff_to_gdatetime    (GTimeValDiff g);
+#else
+/* Older GLib version - keep original function */
 GTimeVal              gtvaldiff_to_gtval        (GTimeValDiff g);
+#endif
 gchar*                timer_sec_msec_to_string  (guint sec, guint msec);
 gchar*                timer_get_maximum_time    ();
 gchar*                timer_ut_timer_to_string  (ut_timer *g);

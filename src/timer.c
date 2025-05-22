@@ -326,7 +326,16 @@ gchar* timer_sec_msec_to_string(guint sec, guint msec)
 
 gchar* timer_gtvaldiff_to_string (GTimeValDiff g)
 {
+#if GLIB_CHECK_VERSION(2,62,0)
+  /* Use the new GDateTime-based approach */
+  GDateTime *dt = gtvaldiff_to_gdatetime(g);
+  gchar *result = timer_sec_msec_to_string(g.tv_sec, g.tv_usec/1000);
+  g_date_time_unref(dt);
+  return result;
+#else
+  /* Use the original approach */
   return timer_sec_msec_to_string (g.tv_sec, g.tv_usec/1000);
+#endif
 }
 
 gchar* timer_ut_timer_to_string (ut_timer *g)
@@ -385,3 +394,31 @@ ut_timer* stopwatch_new_timer (TimerCallbackFunc success_callback,
 {
   return timer_new (0, 0, TIMER_MODE_STOPWATCH, success_callback, error_callback, timer);
 }
+
+/* Add this implementation (you'll need to find where the original function is defined) */
+#if GLIB_CHECK_VERSION(2,62,0)
+/* Modern implementation using GDateTime */
+GDateTime* gtvaldiff_to_gdatetime(GTimeValDiff g)
+{
+  /* Convert seconds and microseconds to a GDateTime object */
+  /* Get current time as a starting point */
+  GDateTime *now = g_date_time_new_now_utc();
+
+  /* Add the seconds and microseconds to create a new datetime */
+  GDateTime *result = g_date_time_add_seconds(now, g.tv_sec + (g.tv_usec / 1000000.0));
+
+  /* Free the original datetime */
+  g_date_time_unref(now);
+
+  return result;
+}
+#else
+/* Original implementation for older GLib versions */
+GTimeVal gtvaldiff_to_gtval(GTimeValDiff g)
+{
+  GTimeVal val;
+  val.tv_sec = g.tv_sec;
+  val.tv_usec = g.tv_usec;
+  return val;
+}
+#endif
