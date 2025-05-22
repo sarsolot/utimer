@@ -22,6 +22,7 @@
  */
 
 #include "utimer.h"
+#include <locale.h>
 
 // Define the global variables for the test executable
 GMainLoop         *loop = NULL;
