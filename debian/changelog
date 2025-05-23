@@ -1,3 +1,21 @@
+utimer (0.5-0ubuntu1~ppa6) plucky; urgency=medium
+
+  * Install README.md as package documentation
+
+ -- Artur Ladka (sarsolot) <arturladka@gmail.com>  Fri, 23 May 2025 19:11:10 +0100
+
+utimer (0.5-0ubuntu1~ppa5) plucky; urgency=medium
+
+  * Disable test suite to fix build on Launchpad
+
+ -- Artur Ladka (sarsolot) <arturladka@gmail.com>  Fri, 23 May 2025 19:04:06 +0100
+
+utimer (0.5-0ubuntu1~ppa4) plucky; urgency=medium
+
+  * Fix build by updating autotools and adding subdir-objects to configure.ac
+
+ -- Artur Ladka (sarsolot) <arturladka@gmail.com>  Fri, 23 May 2025 18:42:20 +0100
+
 utimer (0.5-0ubuntu1~ppa3) plucky; urgency=medium
 
   * Modernized packaging: updated to debhelper-compat 13, fixed rules targets, and added source format
