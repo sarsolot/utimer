@@ -1,5 +1,5 @@
 AC_INIT([utimer], [0.4], [bugs@utimer.codealpha.net])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AC_PROG_CC
 AC_CONFIG_HEADERS([config.h])
 
@@ -38,6 +38,6 @@ AC_MSG_RESULT($enable_debug)
 
 # -- -- --
 
-AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in README data/Makefile src/tests/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in data/Makefile src/tests/Makefile])
 
 AC_OUTPUT
