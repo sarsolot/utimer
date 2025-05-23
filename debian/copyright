@@ -1,0 +1,31 @@
+This package was debianized by Arnaud Soyez <weboide@codealpha.net> on
+Thu, 18 Dec 2008 11:52:03 -0500.
+
+It was downloaded from <http://utimer.codealpha.net/>
+
+Upstream Author:
+
+    Arnaud Soyez <weboide@codealpha.net>
+
+Copyright:
+
+    Copyright (C) 2008, 2009 Arnaud Soyez
+
+License:
+
+    uTimer is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    uTimer is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with uTimer.  If not, see <http://www.gnu.org/licenses/>. 
+
+The Debian packaging is (C) 2008, Arnaud Soyez <weboide@codealpha.net> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+

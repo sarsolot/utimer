@@ -1,0 +1,24 @@
+Source: utimer
+Section: utils
+Priority: optional
+Maintainer: Arnaud Soyez <weboide@codealpha.net>
+Build-Depends: debhelper (>= 7), autotools-dev, libglib2.0-dev, intltool (>= 0.40.5)
+Standards-Version: 3.8.0
+Homepage: http://utimer.codealpha.net/
+
+Package: utimer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: multifunction timer: regular timer, countdown, and stopwatch.
+ µTimer (or "uTimer") is a multifunction timer (command-line interface)
+ which features a timer, a countdown, and a stopwatch (not available yet).
+ .
+ It can be very useful for "command-line geeks" or even for scripts.
+ Compared to the sleep bash function, you can see the current elapsed time!
+ .
+ This is a relatively small program written in C using Glib, it contains
+ a man page with a full description about how to use it.
+ .
+ See 'man utimer' or 'utimer --help' for help.
+ .
+ Note: The stopwatch will be available in the 0.3 release.
