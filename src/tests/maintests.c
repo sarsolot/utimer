@@ -32,6 +32,12 @@
 #include <glib-object.h>
 #include "../utimer.h"
 
+// Define the global variables for the test executable
+GMainLoop         *loop = NULL;
+gboolean          paused = FALSE;
+struct termios    savedttystate;
+Config            ut_config;
+
 #define TEST_DURATION_MAX_OFFSET_MSECONDS 100
 
 /**
@@ -221,8 +227,15 @@ gint main (gint argc, gchar *argv[])
   // initialize test program
   g_test_init (&argc, &argv, NULL);
   
+#if !GLIB_CHECK_VERSION(2,32,0)
+  /* This function is deprecated in newer versions of GLib */
   g_thread_init (NULL);
+#endif
+
+#if !GLIB_CHECK_VERSION(2,36,0)
+  /* This function is deprecated in newer versions of GLib */
   g_type_init ();
+#endif
   
   // set verbosity
   ut_config.verbose = g_test_verbose();

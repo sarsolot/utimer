@@ -27,6 +27,7 @@
 #define g_info(format...) g_log(G_LOG_DOMAIN, G_LOG_LEVEL_INFO, format)
 #endif 
 
-
+/* Function to set up the verbose/debug log handler */
+void setup_log_handler(void);
 
 #endif /* LOG_H */
