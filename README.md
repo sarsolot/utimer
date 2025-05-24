@@ -90,9 +90,9 @@ utimer -t 10m && echo "Time's up!"
 
 ## 🐞 Bug Reports
 
-Please report bugs or issues via Launchpad:
+Please report bugs or issues via GitHub:
 
-🔗 [https://launchpad.net/utimer](https://launchpad.net/utimer)
+🔗 [https://github.com/sarsolot/utimer/issues](https://github.com/sarsolot/utimer/issues)
 
 ## 👥 Authors and Maintainers
 
@@ -111,5 +111,4 @@ This is free software: you are free to use, modify, and redistribute it under th
 ## 🔗 Links
 
 - GitHub Repo: [https://github.com/sarsolot/utimer](https://github.com/sarsolot/utimer)
-- Launchpad Page: [https://launchpad.net/utimer](https://launchpad.net/utimer)
 - PPA for Ubuntu: [https://launchpad.net/~sarsolot/+archive/ubuntu/utimer](https://launchpad.net/~sarsolot/+archive/ubuntu/utimer)

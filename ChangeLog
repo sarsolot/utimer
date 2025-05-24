@@ -1,7 +1,7 @@
 2025-05-23  Artur Ladka  <arturladka@gmail.com>
 
-        * Modernized codebase to support recent GCC and GLib versions
-        * Resolved signal handling and termination issues
+	* Modernized codebase to support recent GCC and GLib versions
+	* Resolved signal handling and termination issues
 
 2009-12-17  Arnaud Soyez  <weboide@codealpha.net>
 
