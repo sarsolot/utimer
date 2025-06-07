@@ -1,3 +1,8 @@
+2025-06-07  Artur Ladka  <arturladka@gmail.com>
+
+	* Added proper signal handling for application termination
+	* Improved build system scripts (libtool, autotools) and documentation.
+
 2025-05-23  Artur Ladka  <arturladka@gmail.com>
 
 	* Modernized codebase to support recent GCC and GLib versions
