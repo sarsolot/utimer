@@ -46,6 +46,7 @@ gboolean      start_thread_exit_check   (ut_timer *timer);
 int           check_exit_from_user      ();
 void          quitloop                  (int error_status);
 void          error_quitloop            ();
+void          error_quitloop_signal     (int signal);
 void          success_quitloop          ();
 void          set_tty_canonical         (int state);
 void          reset_tty_canonical_mode  ();

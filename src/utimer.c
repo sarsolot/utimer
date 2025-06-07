@@ -206,12 +206,12 @@ int main (int argc, char *argv[])
    * we need to stop the main loop to exit correctly, but
    * with error code!
    */
-  signal (SIGALRM,  error_quitloop);
-  signal (SIGHUP,   error_quitloop);
-  signal (SIGINT,   error_quitloop);
-  signal (SIGPIPE,  error_quitloop);
-  signal (SIGQUIT,  error_quitloop);
-  signal (SIGTERM,  error_quitloop);
+  signal (SIGALRM,  error_quitloop_signal);
+  signal (SIGHUP,   error_quitloop_signal);
+  signal (SIGINT,   error_quitloop_signal);
+  signal (SIGPIPE,  error_quitloop_signal);
+  signal (SIGQUIT,  error_quitloop_signal);
+  signal (SIGTERM,  error_quitloop_signal);
   
   /* Set up the log handler */
   setup_log_handler ();

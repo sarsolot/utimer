@@ -198,6 +198,18 @@ void error_quitloop ()
 }
 
 /**
+ * Quits the main loop with error to end the program.
+ * Quits the main loop to end the program ungracefully (EXIT_FAILURE).
+ * This function is called when a signal is received.
+ * It just calls error_quitloop().
+ */
+void error_quitloop_signal (int signal)
+{
+  (void)signal;  // suppress unused warning
+  error_quitloop();
+}
+
+/**
  * Quits the main loop with success code to end the program.
  * Quits the main loop to end the program gracefully (EXIT_SUCCESS).
  * This function just calls quitloop(EXIT_SUCCESS).

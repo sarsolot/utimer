@@ -1,5 +1,12 @@
 AC_INIT([utimer], [0.4], [bugs@utimer.codealpha.net])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+
+# Create m4 directory for macros
+AC_CONFIG_MACRO_DIR([m4])
+
+# Add libtool support
+LT_INIT
+
 AC_PROG_CC
 AC_CONFIG_HEADERS([config.h])
 

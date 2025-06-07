@@ -30,23 +30,35 @@ sudo apt install utimer
 ### Build from Source
 
 Requirements:
-- `glib-2.0`
-- `autotools`
+- `glib-2.0` (with `gobject` and `gthread`)
+- `gio-unix-2.0`
+- `autoconf`
+- `automake`
+- `libtool`
 - `intltool`
+- `gettext`
 
-To compile:
-
+#### For Ubuntu/Debian:
 ```bash
-./configure
-make
-sudo make install
+sudo apt install build-essential autoconf automake libtool intltool libglib2.0-dev gettext
 ```
 
-If `./configure` fails, try:
-
+#### For Arch Linux:
 ```bash
+sudo pacman -S base-devel autoconf automake libtool intltool gettext glib2
+```
+
+#### Build instructions:
+```bash
+# Generate the build system
 ./autogen.sh
-./configure && make
+
+# Configure and build
+./configure
+make
+
+# Install
+sudo make install
 ```
 
 To run tests:
