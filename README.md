@@ -108,10 +108,10 @@ Please report bugs or issues via GitHub:
 
 ## 👥 Authors and Maintainers
 
-- **Arnaud Soyez** <weboide@codealpha.net>  
+- **Arnaud Soyez** <weboide@codealpha.net>
   *Original author (2008–2009)*
 
-- **Artur Ladka** <arturladka@gmail.com>  
+- **Artur Ladka** <arturladka@gmail.com>
   *Maintainer (2025–present) — modernization and Ubuntu packaging*  
   GitHub: [@sarsolot](https://github.com/sarsolot)
 
