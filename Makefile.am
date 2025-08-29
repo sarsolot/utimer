@@ -10,4 +10,4 @@ DISTCLEANFILES =                \
         intltool-update         \
         Makefile.in
 
-EXTRA_DIST += README autogen.sh Doxyfile
+EXTRA_DIST += README.md autogen.sh build.sh release.sh Doxyfile
