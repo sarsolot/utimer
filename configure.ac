@@ -1,4 +1,4 @@
-AC_INIT([utimer], [0.4], [bugs@utimer.codealpha.net])
+AC_INIT([utimer], [0.5-1], [<https://github.com/sarsolot/utimer/issues>])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 # Create m4 directory for macros
@@ -17,7 +17,8 @@ AC_CHECK_LIB(gobject-2.0, main)
 
 # -- i18n --
 
-AC_PROG_INTLTOOL([0.37.1])
+# Replace obsolete AC_PROG_INTLTOOL with modern alternative
+IT_PROG_INTLTOOL([0.37.1])
 GETTEXT_PACKAGE=utimer
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
@@ -27,9 +28,11 @@ else
   AC_DEFINE_UNQUOTED(LOCALEDIR, "${prefix}/${DATADIRNAME}/locale", [Locale dir])
 fi
 
-AM_GLIB_GNU_GETTEXT
+# Replace AM_GLIB_GNU_GETTEXT with standard gettext macros
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.21])
 
-#  -- debug level --
+# -- debug level --
 AC_ARG_ENABLE(debug, [  --enable-debug=[no/minimal/yes]  turn on debugging (default=no)],,enable_debug=no)
 
 AC_MSG_CHECKING([debug level])

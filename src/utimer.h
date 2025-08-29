@@ -1,7 +1,8 @@
 /*
  *  utimer.h
  *
- *  Copyright 2008, 2009  Arnaud Soyez <weboide@codealpha.net>
+ *  Copyright 2008, 2009 Arnaud Soyez <weboide@codealpha.net>
+ *  Copyright 2025 Artur Ladka <arturladka@gmail.com>
  *
  *  This file is part of uTimer.
  *  (uTimer is a CLI program that features a timer, countdown, and a stopwatch)
@@ -58,7 +59,7 @@
  change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by\
  law."
 
-#define COPYRIGHT "Copyright 2008, 2009   Arnaud Soyez <weboide@codealpha.net>"
+#define COPYRIGHT "Copyright 2008, 2009 Arnaud Soyez <weboide@codealpha.net>\nCopyright 2025 Artur Ladka <arturladka@gmail.com>"
 
 
 #define DESCRIPTION ""

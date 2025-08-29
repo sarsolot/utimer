@@ -12,6 +12,8 @@ Originally created by Arnaud Soyez, this project is now maintained and modernize
 - Stopwatch: run indefinitely until stopped
 - Flexible CLI time input (e.g. `1h30m45s300ms`)
 - Quiet mode, test mode, and script-friendly
+- Clean autotools build system with out-of-tree build support
+- Modern GCC and GLib compatibility (GCC 14+, GLib 2.84+)
 
 ## 📦 Installation
 
@@ -49,13 +51,36 @@ sudo pacman -S base-devel autoconf automake libtool intltool gettext glib2
 ```
 
 #### Build instructions:
+
+**Option 1: Quick build (recommended)**
+```bash
+# Prepare, configure, and build in one step
+./build.sh
+
+# The binary will be at: build/src/utimer
+./build/src/utimer --version
+
+# To install
+cd build && sudo make install
+
+# To clean
+./build.sh clean
+```
+
+**Option 2: Manual build**
 ```bash
 # Generate the build system
 ./autogen.sh
 
-# Configure and build
+# Out-of-tree build (recommended)
+mkdir build
+cd build
+../configure
+make -j$(nproc)
+
+# Or in-tree build
 ./configure
-make
+make -j$(nproc)
 
 # Install
 sudo make install
@@ -108,10 +133,10 @@ Please report bugs or issues via GitHub:
 
 ## 👥 Authors and Maintainers
 
-- **Arnaud Soyez** <weboide@codealpha.net>  
+- **Arnaud Soyez** <weboide@codealpha.net>
   *Original author (2008–2009)*
 
-- **Artur Ladka** <arturladka@gmail.com>  
+- **Artur Ladka** <arturladka@gmail.com>
   *Maintainer (2025–present) — modernization and Ubuntu packaging*  
   GitHub: [@sarsolot](https://github.com/sarsolot)
 

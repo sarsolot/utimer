@@ -1,2 +1,2 @@
 version=3
-http://utimer.codealpha.net/files/utimer-(.*)\.tar\.gz
+https://github.com/sarsolot/utimer/releases/download/v$1/utimer-$1.tar.gz
