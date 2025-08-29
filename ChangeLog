@@ -1,3 +1,13 @@
+2025-08-29  Artur Ladka  <arturladka@gmail.com>
+
+	* Added bash autocompletion support (#5)
+	- Complete long options (--timer, --countdown, --stopwatch, --clock, etc.)
+	- Complete short options (-t, -c, -s, -k, etc.)
+	- Suggest common time patterns for timer/countdown options (1s, 5m, 1h, etc.)
+	- Cross-platform installation with autotools integration
+	- Auto-loading support for modern bash-completion systems
+	- Install to /usr/share/bash-completion/completions/ or /etc/bash_completion.d/
+
 2025-06-07  Artur Ladka  <arturladka@gmail.com>
 
 	* Added proper signal handling for application termination
