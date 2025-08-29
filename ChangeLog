@@ -1,3 +1,12 @@
+2025-08-29  Artur Ladka  <arturladka@gmail.com>
+
+	* Added clock mode feature (#2)
+	- New --clock/-k option displays current system time in HH:MM:SS format
+	- Updates every second with accurate system time reading
+	- Integrated with existing conflict detection and help system
+	- Updated documentation (README, manual page) to include clock mode
+	- Clock mode can be stopped with 'Q' key like stopwatch mode
+
 2025-06-07  Artur Ladka  <arturladka@gmail.com>
 
 	* Added proper signal handling for application termination
