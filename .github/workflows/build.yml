@@ -24,6 +24,7 @@ jobs:
           libtool \
           intltool \
           gettext \
+          autopoint \
           libglib2.0-dev \
           pkg-config \
           bash-completion
@@ -64,6 +65,7 @@ jobs:
           libtool \
           intltool \
           gettext \
+          autopoint \
           libglib2.0-dev \
           pkg-config \
           bash-completion
