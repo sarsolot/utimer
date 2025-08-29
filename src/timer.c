@@ -365,6 +365,7 @@ ut_timer* timer_new (guint seconds,
   t->mseconds = mseconds;
   t->mode = mode;
   t->checkloop_thread_stop_with_error = FALSE;
+  t->timer_print_source_id = 0; // Initialize to 0 (invalid source ID)
   t->success_callback = success_callback;
   t->error_callback   = error_callback;
   t->gtimer      = timer;
