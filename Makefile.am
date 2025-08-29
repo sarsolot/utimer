@@ -1,6 +1,6 @@
 include $(top_srcdir)/Makefile.decl 
 
-SUBDIRS = src po data
+SUBDIRS = src po data completion
 
 ACLOCAL_AMFLAGS = -I m4
 

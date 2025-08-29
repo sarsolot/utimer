@@ -32,6 +32,15 @@ fi
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.21])
 
+# -- bash completion --
+PKG_CHECK_MODULES([BASH_COMPLETION], [bash-completion >= 2.0], [
+    BASH_COMPLETION_DIR="`pkg-config --variable=completionsdir bash-completion`"
+    AC_SUBST([BASH_COMPLETION_DIR])
+    AM_CONDITIONAL([HAVE_BASH_COMPLETION],[true])
+], [
+    AM_CONDITIONAL([HAVE_BASH_COMPLETION],[false])
+])
+
 # -- debug level --
 AC_ARG_ENABLE(debug, [  --enable-debug=[no/minimal/yes]  turn on debugging (default=no)],,enable_debug=no)
 
@@ -48,6 +57,6 @@ AC_MSG_RESULT($enable_debug)
 
 # -- -- --
 
-AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in data/Makefile src/tests/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in data/Makefile src/tests/Makefile completion/Makefile])
 
 AC_OUTPUT
