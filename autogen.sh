@@ -5,7 +5,7 @@ echo "======== Running libtoolize ==========="
 libtoolize --force --copy || exit 1
 
 echo "======== Running autoreconf ==========="
-autoreconf --force --install --verbose -I/usr/share/gettext/m4 -I/usr/share/aclocal || exit 1
+autoreconf --force --install --verbose || exit 1
 
 echo "======== Running intltoolize =========="
 echo "(there may be no output, it's fine)"
