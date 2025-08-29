@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CPPFLAGS_MAINT_APPEND = -DNDEBUG
+
 %:
 	dh $@
 
@@ -8,6 +11,15 @@
 build-arch: build
 build-indep: build
 
+override_dh_auto_configure:
+	# Use the modernized autogen.sh and then configure
+	./autogen.sh
+	dh_auto_configure
+
 override_dh_auto_test:
-	# Disable flaky GLib tests in PPA
-	:
+	# Enable tests but handle gracefully if they fail in PPA environment
+	dh_auto_test || echo "Tests failed but continuing build"
+
+override_dh_auto_clean:
+	./build.sh clean || true
+	dh_auto_clean

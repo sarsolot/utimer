@@ -2,21 +2,33 @@ Source: utimer
 Section: utils
 Priority: optional
 Maintainer: Artur Ladka (sarsolot) <arturladka@gmail.com>
-Build-Depends: debhelper-compat (= 13), autotools-dev, libglib2.0-dev, intltool (>= 0.40.5)
-Standards-Version: 3.8.0
+Build-Depends: debhelper-compat (= 13),
+               autotools-dev,
+               libglib2.0-dev,
+               intltool (>= 0.40.5),
+               gettext
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
 Homepage: https://github.com/sarsolot/utimer/
+Vcs-Git: https://github.com/sarsolot/utimer.git
+Vcs-Browser: https://github.com/sarsolot/utimer
 
 Package: utimer
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: multifunction timer: regular timer, countdown, and stopwatch.
- µTimer (or "uTimer") is a multifunction timer (command-line interface)
- which features a timer, a countdown, and a stopwatch (not available yet).
+Description: multifunction timer: regular timer, countdown, and stopwatch
+ µTimer (or "uTimer") is a multifunction timer with command-line interface
+ supporting three modes: timer, countdown, and stopwatch.
  .
- It can be very useful for "command-line geeks" or even for scripts.
- Compared to the sleep bash function, you can see the current elapsed time!
+ Features:
+  * Timer: count up to a specified time
+  * Countdown: count down from a time to zero
+  * Stopwatch: run indefinitely until stopped
+  * Flexible CLI time input (e.g. 1h30m45s300ms)
+  * Quiet mode, test mode, and script-friendly
+  * Modern GCC and GLib compatibility
  .
- This is a relatively small program written in C using Glib, it contains
- a man page with a full description about how to use it.
+ This is a small program written in C using GLib, with a comprehensive
+ man page describing all usage options.
  .
  See 'man utimer' or 'utimer --help' for help.
