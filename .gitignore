@@ -34,3 +34,11 @@ po/stamp-it
 
 # Out-of-tree build directory
 build/
+
+# Debian packaging artifacts
+debian/tmp/
+debian/utimer/
+debian/files
+debian/debhelper-build-stamp
+debian/*.log
+debian/*.substvars
