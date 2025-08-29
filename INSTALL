@@ -1,6 +1,22 @@
 Installation Instructions
 *************************
 
+µTimer-specific Quick Start
+===========================
+
+For the fastest way to build µTimer, simply run:
+
+    ./build.sh
+
+This will automatically prepare the build system, configure for an
+out-of-tree build, and compile with parallel jobs.
+
+For more detailed generic autotools installation instructions,
+see below.
+
+Generic Autotools Installation
+==============================
+
 Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005,
 2006, 2007 Free Software Foundation, Inc.
 
