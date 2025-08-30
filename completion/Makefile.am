@@ -11,3 +11,7 @@ else
 bashcompletiondir = $(sysconfdir)/bash_completion.d
 dist_bashcompletion_DATA = utimer-completion.bash
 endif
+
+# Empty test target for compatibility with Makefile.decl
+test:
+	@echo "No tests in completion directory"
