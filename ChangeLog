@@ -6,7 +6,6 @@
 	- Clock mode with -m: shows HH:MM:SS.mmm (e.g., 10:21:09.405)
 	- Preserves existing millisecond display for timer/countdown/stopwatch modes
 	- Updated documentation (README.md, utimer.1 manual page)
-	- Merged latest master fixes including build system improvements
 
 2025-08-29  Artur Ladka  <arturladka@gmail.com>
 
@@ -16,6 +15,16 @@
 	- Integrated with existing conflict detection and help system
 	- Updated documentation (README, manual page) to include clock mode
 	- Clock mode can be stopped with 'Q' key like stopwatch mode
+	* Added bash autocompletion support (#5)-
+	- Complete long options (--timer, --countdown, --stopwatch, --clock, etc.)
+	- Complete short options (-t, -c, -s, -k, etc.)
+	- Suggest common time patterns for timer/countdown options (1s, 5m, 1h, etc.)
+	- Auto-loading support for modern bash-completion systems
+	- Install to /usr/share/bash-completion/completions/ or /etc/bash_completion.d/
+	* Modernized build system
+	- Modernize autotools configuration to eliminate warnings
+	- Add out-of-tree build support
+	- Convert project to industry-standard minimal source approach
 
 2025-06-07  Artur Ladka  <arturladka@gmail.com>
 
