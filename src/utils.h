@@ -34,6 +34,7 @@ typedef struct
   gboolean    quiet;
   gboolean    debug;
   gboolean    quit_with_success;
+  gboolean    show_milliseconds;
   gint        current_exit_status_code;
   GTimer      *timer;
 } Config;

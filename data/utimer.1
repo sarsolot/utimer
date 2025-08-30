@@ -1,11 +1,14 @@
 .TH "UTIMER" "1" "August 29, 2025" "" "uTimer"
 .SH "NAME"
-\fButimer\fP \- command\-line "timer" tool which features a timer, a countdown and a stopwatch.
+\fButimer\fP \- command\-line "timer" tool which features a timer, a countdown, a stopwatch and a clock.
 
 .SH "SYNOPSIS"
 .B utimer
 .RI [\-\-timer=TIMELENGTH\ |\ \-t\ TIMELENGTH]
 .RI [\-\-countdown=TIMELENGTH\ |\ \-c\ TIMELENGTH]
+.RI [\-\-stopwatch\ |\ \-s]
+.RI [\-\-clock\ |\ \-k]
+.RI [\-\-milliseconds\ |\ \-m]
 .RI [\-\-quiet\ |\ \-q]
 .RI [\-\-verbose\ |\ \-v]
 .RI [\-\-quit\-with\-success]
@@ -19,7 +22,7 @@
 .B utimer
 or 
 .B µTimer
-(pronounced "micro\-timer") is a multifunction timer (command\-line only). It features a timer, a countdown, and a stopwatch.
+(pronounced "micro\-timer") is a multifunction timer (command\-line only). It features a timer, a countdown, a stopwatch, and a clock.
 
 The
 .B timer
@@ -34,6 +37,10 @@ compared to the timer, has the only difference that the starting point is the gi
 The
 .B stopwatch
 is like a real stopwatch where you can measure time of multiple events, or use it for (board) games, or anything else. It starts counting time when the program is started, and it can be stopped (using the 'Q' key) or otherwise you can just hit the ENTER key when you have to take multiple measures without stopping the counting.
+
+The
+.B clock
+displays the current time in HH:MM:SS format, updating every second. It reads and displays the system's current time accurately. With the \-\-milliseconds option, it can also display milliseconds (HH:MM:SS.mmm). The clock can be stopped using the 'Q' key.
 
 .LP 
 .SH "OPTIONS"
@@ -61,6 +68,16 @@ Starts the stopwatch that runs until it is stopped using the 'Q' key or by other
 section in
 .B USAGE
 to read more about how to use the stopwatch.
+.B
+.IP --clock\ |\ \-k
+Shows the current time as a clock in HH:MM:SS format. The clock updates every second by reading the system's current time. With \-\-milliseconds, it displays HH:MM:SS.mmm format. Can be stopped using the 'Q' key. See the
+.B Clock
+section in
+.B USAGE
+to read more about how to use the clock.
+.B
+.IP --milliseconds\ |\ \-m
+Show milliseconds in clock mode. When used with \-\-clock, displays time in HH:MM:SS.mmm format instead of HH:MM:SS. This option has no effect with other timer modes as they already display milliseconds.
 .B
 .IP --verbose\ |\ \-v
 Print more information during the program's process. (note that if used with -q, this option is ignored)
@@ -132,6 +149,19 @@ or
 
 When using the stopwatch, it counts until it is stopped using the 'Q' key or Ctrl+C or certain system signals (SIGKILL for example).
 You can use the ENTER key to take measures (like a snapshot) of the elapsed time.
+
+.B
+.IP Clock:
+
+.B utimer --clock
+or
+.B utimer -k
+
+.B utimer --clock --milliseconds
+or
+.B utimer -k -m
+
+When using the clock, it displays the current system time in HH:MM:SS format, updating every second. When used with the \-\-milliseconds option, it shows HH:MM:SS.mmm format with millisecond precision. The clock provides accurate timekeeping by reading the system time at regular intervals. It can be stopped using the 'Q' key or Ctrl+C.
 
 
 .SH SHORTCUT KEYS
