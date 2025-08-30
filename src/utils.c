@@ -290,6 +290,7 @@ void init_config (Config *conf)
   conf->quiet    = FALSE;
   conf->debug    = FALSE;
   conf->quit_with_success        = FALSE;
+  conf->show_milliseconds        = FALSE;
   conf->current_exit_status_code = EXIT_SUCCESS;
   conf->timer    = g_timer_new ();
 }

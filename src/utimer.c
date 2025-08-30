@@ -34,9 +34,11 @@ Config            ut_config;
 //~ static    char            **remaining_args;
 static ut_timer        *ttimer;
 static gchar           *timer_info, *countdown_info;
-static gboolean        *stopwatch = FALSE,
-                       *show_limits = FALSE,
-                       *show_version = FALSE;
+static gboolean        stopwatch = FALSE,
+                       clock_mode = FALSE,
+                       show_milliseconds = FALSE,
+                       show_limits = FALSE,
+                       show_version = FALSE;
 
 static GOptionEntry entries[] = {
   
@@ -69,6 +71,22 @@ static GOptionEntry entries[] = {
     NULL
   },
   
+  {"clock",
+    'k',
+    0,
+    G_OPTION_ARG_NONE,
+    &(clock_mode),
+    N_("show current time as a clock. Use 'Q' key to quit"),
+    NULL
+  },
+  {"milliseconds",
+    'm',
+    0,
+    G_OPTION_ARG_NONE,
+    &(show_milliseconds),
+    N_("show milliseconds in clock mode (only affects --clock)"),
+    NULL
+  },
   {"verbose",
     'v',
     0,
@@ -256,7 +274,8 @@ int main (int argc, char *argv[])
       || show_version
       || show_limits
       || countdown_info
-      || stopwatch))
+      || stopwatch
+      || clock_mode))
   {
     g_printerr (_("No option has been specified!\n"));
     g_printerr (_("Run '%s --help' to see a full list of available command\
@@ -269,13 +288,17 @@ int main (int argc, char *argv[])
   
   if (ut_config.debug)
     ut_config.quiet = FALSE;
-  
-  if (timer_info && (countdown_info || stopwatch)
-    || countdown_info && stopwatch)
+
+  /* Copy milliseconds flag to config */
+  ut_config.show_milliseconds = show_milliseconds;
+
+  if (timer_info && (countdown_info || stopwatch || clock_mode)
+    || countdown_info && (stopwatch || clock_mode)
+    || stopwatch && clock_mode)
   {
     g_warning (_("Conflicting options!\nThe following options cannot\n\
  be used simultaneously:\n -t (timer mode), -c (countdown mode), -s\
- (stopwatch mode)."));
+ (stopwatch mode), -k (clock mode)."));
     exit (EXIT_FAILURE);
   }
   
@@ -350,8 +373,8 @@ int main (int argc, char *argv[])
   
   g_idle_add ((GSourceFunc) start_thread_exit_check, ttimer);
   
-  /* -------------- TIMER&COUNTDOWN MODE -------------- */
-  if (timer_info || countdown_info || stopwatch)
+  /* -------------- TIMER&COUNTDOWN&STOPWATCH&CLOCK MODE -------------- */
+  if (timer_info || countdown_info || stopwatch || clock_mode)
   {
     
     if (countdown_info)
@@ -366,6 +389,11 @@ int main (int argc, char *argv[])
       ttimer = timer_new_timer (0, 0, success_quitloop, error_quitloop, ut_config.timer);
       parse_time_pattern (timer_info, &(ttimer->seconds), &(ttimer->mseconds));
     }
+    else if (clock_mode)
+    {
+      g_debug ("Clock Mode");
+      ttimer = clock_new_timer (success_quitloop, error_quitloop, ut_config.timer);
+    }
     else
     {
       g_debug ("Stopwatch Mode");
@@ -377,7 +405,7 @@ int main (int argc, char *argv[])
     g_free (tmp);
     tmp = NULL;
     
-    if (!ut_config.quiet && ut_config.verbose && !stopwatch)
+    if (!ut_config.quiet && ut_config.verbose && !stopwatch && !clock_mode)
     {
       tmp = timer_ut_timer_to_string (ttimer);
       g_info (_("Timer will exit after reaching: %s"), tmp);
@@ -388,9 +416,9 @@ int main (int argc, char *argv[])
     ttimer->timer_print_source_id = g_timeout_add (TIMER_PRINT_RATE_MSEC,
                                                    (GSourceFunc) timer_print,
                                                    ttimer);
-    if (ttimer->mode != TIMER_MODE_STOPWATCH)
+    if (ttimer->mode != TIMER_MODE_STOPWATCH && ttimer->mode != TIMER_MODE_CLOCK)
       g_idle_add ((GSourceFunc) timer_run_checkloop_thread, ttimer);
-  } /* -------------- END TIMER&COUNTDOWN MODE -------------- */
+  } /* -------------- END TIMER&COUNTDOWN&STOPWATCH&CLOCK MODE -------------- */
   else
   { /* No mode selected! We quit the loop ASAP. */
     g_idle_add ((GSourceFunc) error_quitloop, NULL);

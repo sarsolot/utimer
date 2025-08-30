@@ -38,7 +38,8 @@ typedef enum
   TIMER_MODE_NONE,
   TIMER_MODE_COUNTDOWN,
   TIMER_MODE_STOPWATCH,
-  TIMER_MODE_TIMER
+  TIMER_MODE_TIMER,
+  TIMER_MODE_CLOCK
 } timer_mode;
 
 typedef struct
@@ -76,6 +77,7 @@ GDateTime*            gtvaldiff_to_gdatetime    (GTimeValDiff g);
 GTimeVal              gtvaldiff_to_gtval        (GTimeValDiff g);
 #endif
 gchar*                timer_sec_msec_to_string  (guint sec, guint msec);
+gchar*                timer_clock_string_from_sec_msec (guint sec, guint msec, gboolean show_milliseconds);
 gchar*                timer_get_maximum_time    ();
 gchar*                timer_ut_timer_to_string  (ut_timer *g);
 gchar*                timer_gtvaldiff_to_string (GTimeValDiff g);
@@ -90,6 +92,9 @@ ut_timer*             countdown_new_timer       (guint seconds,
                                                  TimerCallbackFunc error_callback,
                                                  GTimer* timer);
 ut_timer*             stopwatch_new_timer       (TimerCallbackFunc success_callback,
+                                                 TimerCallbackFunc error_callback,
+                                                 GTimer* timer);
+ut_timer*             clock_new_timer           (TimerCallbackFunc success_callback,
                                                  TimerCallbackFunc error_callback,
                                                  GTimer* timer);
 #endif /* TIMER_H */

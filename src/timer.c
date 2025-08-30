@@ -81,6 +81,32 @@ static GTimeValDiff countdown_get_diff (ut_timer *t)
   return diff;
 }
 
+static GTimeValDiff clock_get_diff (ut_timer *t)
+{
+  GTimeValDiff diff;
+  GDateTime *now;
+  gint hour, minute, second;
+  guint total_seconds;
+
+  /* Get current local time */
+  now = g_date_time_new_now_local();
+  hour = g_date_time_get_hour(now);
+  minute = g_date_time_get_minute(now);
+  second = g_date_time_get_second(now);
+
+  /* Convert to seconds since midnight */
+  total_seconds = hour * 3600 + minute * 60 + second;
+
+  diff.tv_sec = total_seconds;
+  diff.tv_usec = g_date_time_get_microsecond(now);
+  diff.negative = FALSE;
+
+  g_date_time_unref(now);
+
+  g_debug ("clock_get_diff: %u.%06u (current time)", diff.tv_sec, diff.tv_usec);
+  return diff;
+}
+
 gboolean timer_print (ut_timer *t)
 {
   GTimeValDiff delta;
@@ -88,18 +114,28 @@ gboolean timer_print (ut_timer *t)
   
   if (t->mode == TIMER_MODE_COUNTDOWN)
     delta = countdown_get_diff(t);
+  else if (t->mode == TIMER_MODE_CLOCK)
+    delta = clock_get_diff(t);
   else
     delta = timer_get_diff(t);
   
-  tmpchar = timer_gtvaldiff_to_string(delta);
+  /* Use clock-specific formatting for clock mode */
+  if (t->mode == TIMER_MODE_CLOCK)
+  {
+    tmpchar = timer_clock_string_from_sec_msec(delta.tv_sec, delta.tv_usec/1000, ut_config.show_milliseconds);
+  }
+  else
+    tmpchar = timer_gtvaldiff_to_string(delta);
   
   if (t->mode == TIMER_MODE_COUNTDOWN)
     g_message (_("\rTime Remaining: %s "), tmpchar); /* trailing space needed! */
+  else if (t->mode == TIMER_MODE_CLOCK)
+    g_message (_("\rCurrent Time: %s "), tmpchar); /* trailing space needed! */
   else
     g_message (_("\rElapsed Time: %s "), tmpchar); /* trailing space needed! */
-  
+
   g_free (tmpchar);
-  
+
   return TRUE;
 }
 
@@ -325,6 +361,31 @@ gchar* timer_sec_msec_to_string(guint sec, guint msec)
                          msec);
 }
 
+/**
+ * Return clock-formatted string for the given time (HH:MM:SS or HH:MM:SS.mmm).
+ */
+gchar* timer_clock_string_from_sec_msec(guint sec, guint msec, gboolean show_milliseconds)
+{
+  g_assert (msec < 1000);
+  guint hours = sec / 3600;
+  sec -= hours * 3600;
+  guint minutes = sec / 60;
+  sec -= minutes * 60;
+
+  /* For clock display, choose format based on show_milliseconds parameter */
+  if (show_milliseconds)
+    return g_strdup_printf("%02u:%02u:%02u.%03u",
+                           hours % 24,  /* Wrap at 24 hours for 24-hour format */
+                           minutes,
+                           sec,
+                           msec);
+  else
+    return g_strdup_printf("%02u:%02u:%02u",
+                           hours % 24,  /* Wrap at 24 hours for 24-hour format */
+                           minutes,
+                           sec);
+}
+
 gchar* timer_gtvaldiff_to_string (GTimeValDiff g)
 {
 #if GLIB_CHECK_VERSION(2,62,0)
@@ -395,6 +456,13 @@ ut_timer* stopwatch_new_timer (TimerCallbackFunc success_callback,
                                GTimer* timer)
 {
   return timer_new (0, 0, TIMER_MODE_STOPWATCH, success_callback, error_callback, timer);
+}
+
+ut_timer* clock_new_timer (TimerCallbackFunc success_callback,
+                          TimerCallbackFunc error_callback,
+                          GTimer* timer)
+{
+  return timer_new (0, 0, TIMER_MODE_CLOCK, success_callback, error_callback, timer);
 }
 
 /* Add this implementation (you'll need to find where the original function is defined) */

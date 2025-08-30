@@ -1,7 +1,7 @@
 # µTimer (utimer)
 
 µTimer (pronounced "micro-timer") is a command-line multifunction timer for Linux.  
-It supports three modes: **timer**, **countdown**, and **stopwatch**, with flexible time input and scripting support.
+It supports four modes: **timer**, **countdown**, **stopwatch**, and **clock** (with optional milliseconds), with flexible time input and scripting support.
 
 Originally created by Arnaud Soyez, this project is now maintained and modernized by Artur Ladka to support modern Linux systems (GCC 14, GLib 2.84+, etc).
 
@@ -10,6 +10,7 @@ Originally created by Arnaud Soyez, this project is now maintained and modernize
 - Timer: count up to a specified time
 - Countdown: count down from a time to zero
 - Stopwatch: run indefinitely until stopped
+- Clock: display current system time in HH:MM:SS format, optionally with milliseconds
 - Flexible CLI time input (e.g. `1h30m45s300ms`)
 - Quiet mode, test mode, and script-friendly
 - Clean autotools build system with out-of-tree build support
@@ -89,8 +90,54 @@ sudo make install
 To run tests:
 
 ```bash
-make test
+# After building with ./build.sh or make
+make check
+
+# Or run tests directly
+cd build/src/tests && ./maintests
 ```
+
+## 🛠️ Development
+
+This project uses a **minimal source approach**:
+- Only source files are tracked in git
+- Generated files (configure, Makefile.in, etc.) are excluded via `.gitignore`
+- Developers run `./autogen.sh` to generate the build system
+- Release tarballs include all generated files for end users
+
+### Development Workflow
+
+```bash
+# 1. Generate build system (first time only)
+./autogen.sh
+
+# 2. Build and test
+./build.sh
+
+# 3. Run tests
+make check
+
+# 4. Make changes to source files
+# 5. Rebuild
+make -C build
+
+# 6. Test changes
+cd build/src/tests && ./maintests
+```
+
+### Creating Release Tarballs
+
+```bash
+# Generate distribution tarball (includes all generated files)
+./release.sh
+
+# This runs:
+# - ./autogen.sh
+# - ./configure
+# - make distcheck (builds, tests, and packages)
+```
+
+The release tarball can be distributed to end users who don't need autotools installed.
 
 ## 🚀 Usage
 
@@ -110,6 +157,15 @@ utimer --countdown 2m15s
 
 ```bash
 utimer --stopwatch
+```
+
+### Clock mode:
+
+```bash
+utimer --clock              # Shows: 10:21:00
+utimer --clock --milliseconds  # Shows: 10:21:09.405
+# Or use short form:
+utimer -k -m               # Shows: 10:21:09.405
 ```
 
 Valid time suffixes:
