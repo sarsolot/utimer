@@ -1,54 +1,54 @@
 2025-08-30  Artur Ladka  <arturladka@gmail.com>
 
-        * Added optional milliseconds display for clock mode (#2)
-        - New --milliseconds/-m option shows time in HH:MM:SS.mmm format
-        * Clock mode without -m: shows HH:MM:SS (e.g., 10:21:00)
-        * Clock mode with -m: shows HH:MM:SS.mmm (e.g., 10:21:09.405)
-        * Preserves existing millisecond display for timer/countdown/stopwatch modes
-        * Updated documentation (README.md, utimer.1 manual page)
-        * Merged latest master fixes including build system improvements
+    * Added optional milliseconds display for clock mode (#2)
+    - New --milliseconds/-m option shows time in HH:MM:SS.mmm format
+    * Clock mode without -m: shows HH:MM:SS (e.g., 10:21:00)
+    * Clock mode with -m: shows HH:MM:SS.mmm (e.g., 10:21:09.405)
+    * Preserves existing millisecond display for timer/countdown/stopwatch modes
+    * Updated documentation (README.md, utimer.1 manual page)
+    * Merged latest master fixes including build system improvements
 
 2025-08-29  Artur Ladka  <arturladka@gmail.com>
 
-        * Added bash autocompletion support (#5)
-        * Complete long options (--timer, --countdown, --stopwatch, --clock, etc.)
-        * Complete short options (-t, -c, -s, -k, etc.)
-        * Suggest common time patterns for timer/countdown options (1s, 5m, 1h, etc.)
-        * Cross-platform installation with autotools integration
-        * Auto-loading support for modern bash-completion systems
-        * Install to /usr/share/bash-completion/completions/ or /etc/bash_completion.d/
+    * Added bash autocompletion support (#5)
+    * Complete long options (--timer, --countdown, --stopwatch, --clock, etc.)
+    * Complete short options (-t, -c, -s, -k, etc.)
+    * Suggest common time patterns for timer/countdown options (1s, 5m, 1h, etc.)
+    * Cross-platform installation with autotools integration
+    * Auto-loading support for modern bash-completion systems
+    * Install to /usr/share/bash-completion/completions/ or /etc/bash_completion.d/
 
-        * Added clock mode feature (#2)
-        * New --clock/-k option displays current system time in HH:MM:SS format
-        * Updates every second with accurate system time reading
-        * Integrated with existing conflict detection and help system
-        * Updated documentation (README, manual page) to include clock mode
-        * Clock mode can be stopped with 'Q' key like stopwatch mode
+    * Added clock mode feature (#2)
+    * New --clock/-k option displays current system time in HH:MM:SS format
+    * Updates every second with accurate system time reading
+    * Integrated with existing conflict detection and help system
+    * Updated documentation (README, manual page) to include clock mode
+    * Clock mode can be stopped with 'Q' key like stopwatch mode
 
 2025-06-07  Artur Ladka  <arturladka@gmail.com>
 
-        * Added proper signal handling for application termination
-        * Improved build system scripts (libtool, autotools) and documentation.
+    * Added proper signal handling for application termination
+    * Improved build system scripts (libtool, autotools) and documentation.
 
 2025-05-23  Artur Ladka  <arturladka@gmail.com>
 
-        * Modernized codebase to support recent GCC and GLib versions
-        * Resolved signal handling and termination issues
+    * Modernized codebase to support recent GCC and GLib versions
+    * Resolved signal handling and termination issues
 
 2009-12-17  Arnaud Soyez  <weboide@codealpha.net>
 
-        * Lowered requirements for glib-2.0 to 2.16.6 and intltool to 0.37.1
-        * Added signal.h as include to compile fine on a "lower-requirements machine"
+    * Lowered requirements for glib-2.0 to 2.16.6 and intltool to 0.37.1
+    * Added signal.h as include to compile fine on a "lower-requirements machine"
 
 2009-06-01  Arnaud Soyez  <weboide@codealpha.net>
 
-        * Previous commit was release 0.3
-        * Bumped version to 0.4
+    * Previous commit was release 0.3
+    * Bumped version to 0.4
 
 2008-11-20  Arnaud Soyez  <weboide@codealpha.net>
 
-        * Added i18n support for European languages
-        * Fixed small problems
-        * Improved verbosity levels
-        * Improved debug output
+    * Added i18n support for European languages
+    * Fixed small problems
+    * Improved verbosity levels
+    * Improved debug output
 
