@@ -294,7 +294,11 @@ static void test_clock_stopwatch_conflict (void)
   );
 
   g_assert(result == TRUE);
-  g_assert(exit_status != 0); // Should exit with non-zero status
+  GError *check_err = NULL;
+  gboolean ok = g_spawn_check_wait_status(exit_status, &check_err);
+  // We expect failure, so ok should be FALSE and check_err set.
+  g_assert(ok == FALSE);
+  g_clear_error(&check_err);
 
   // Check that error message mentions the conflict
   gboolean found_conflict = FALSE;
