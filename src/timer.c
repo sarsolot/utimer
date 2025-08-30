@@ -122,14 +122,7 @@ gboolean timer_print (ut_timer *t)
   /* Use clock-specific formatting for clock mode */
   if (t->mode == TIMER_MODE_CLOCK)
   {
-    if (ut_config.show_milliseconds)
-      tmpchar = g_strdup_printf("%02u:%02u:%02u.%03u",
-                                (delta.tv_sec / 3600) % 24,  /* Hours */
-                                (delta.tv_sec / 60) % 60,    /* Minutes */
-                                delta.tv_sec % 60,           /* Seconds */
-                                delta.tv_usec / 1000);       /* Milliseconds */
-    else
-      tmpchar = timer_sec_msec_to_clock_string(delta.tv_sec, delta.tv_usec/1000);
+    tmpchar = timer_sec_msec_to_clock_string(delta.tv_sec, delta.tv_usec/1000, ut_config.show_milliseconds);
   }
   else
     tmpchar = timer_gtvaldiff_to_string(delta);
@@ -371,7 +364,7 @@ gchar* timer_sec_msec_to_string(guint sec, guint msec)
 /**
  * Return clock-formatted string for the given time (HH:MM:SS).
  */
-gchar* timer_sec_msec_to_clock_string(guint sec, guint msec)
+gchar* timer_sec_msec_to_clock_string(guint sec, guint msec, gboolean show_milliseconds)
 {
   g_assert (msec < 1000);
   guint hours = sec / 3600;
@@ -379,11 +372,18 @@ gchar* timer_sec_msec_to_clock_string(guint sec, guint msec)
   guint minutes = sec / 60;
   sec -= minutes * 60;
 
-  /* For clock display, we want just HH:MM:SS format */
-  return g_strdup_printf("%02u:%02u:%02u",
-                         hours % 24,  /* Wrap at 24 hours for 24-hour format */
-                         minutes,
-                         sec);
+  /* For clock display, choose format based on show_milliseconds parameter */
+  if (show_milliseconds)
+    return g_strdup_printf("%02u:%02u:%02u.%03u",
+                           hours % 24,  /* Wrap at 24 hours for 24-hour format */
+                           minutes,
+                           sec,
+                           msec);
+  else
+    return g_strdup_printf("%02u:%02u:%02u",
+                           hours % 24,  /* Wrap at 24 hours for 24-hour format */
+                           minutes,
+                           sec);
 }
 
 gchar* timer_gtvaldiff_to_string (GTimeValDiff g)

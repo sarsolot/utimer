@@ -77,7 +77,7 @@ GDateTime*            gtvaldiff_to_gdatetime    (GTimeValDiff g);
 GTimeVal              gtvaldiff_to_gtval        (GTimeValDiff g);
 #endif
 gchar*                timer_sec_msec_to_string  (guint sec, guint msec);
-gchar*                timer_sec_msec_to_clock_string (guint sec, guint msec);
+gchar*                timer_sec_msec_to_clock_string (guint sec, guint msec, gboolean show_milliseconds);
 gchar*                timer_get_maximum_time    ();
 gchar*                timer_ut_timer_to_string  (ut_timer *g);
 gchar*                timer_gtvaldiff_to_string (GTimeValDiff g);
