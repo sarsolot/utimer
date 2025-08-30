@@ -11,16 +11,17 @@
 
 _utimer_completions()
 {
-    local cur prev opts
+    local cur prev opts all_words
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
+    all_words="${COMP_WORDS[*]}"
 
     # All available options
-    opts="--timer --countdown --stopwatch --clock --verbose --quiet --quit-with-success --limits --version --help --debug"
+    opts="--timer --countdown --stopwatch --clock --milliseconds --verbose --quiet --quit-with-success --limits --version --help --debug"
 
     # Short options
-    short_opts="-t -c -s -k -v -q -L -d -h"
+    short_opts="-t -c -s -k -m -v -q -L -d -h"
 
     case ${prev} in
         --timer|-t|--countdown|-c)
@@ -28,8 +29,20 @@ _utimer_completions()
             COMPREPLY=( $(compgen -W "1s 5s 10s 30s 1m 2m 5m 10m 30m 1h 2h" -- ${cur}) )
             return 0
             ;;
-        --help|-h|--version|--limits|-L|--stopwatch|-s|--clock|-k|--verbose|-v|--quiet|-q|--quit-with-success|--debug|-d)
+        --help|-h|--version|--limits|-L|--stopwatch|-s|--verbose|-v|--quiet|-q|--quit-with-success|--debug|-d)
             # These options don't take arguments, so no completion
+            return 0
+            ;;
+        --clock|-k)
+            # For clock mode, suggest milliseconds option if not already present
+            if [[ ! ${all_words} =~ (--milliseconds|-m) ]]; then
+                COMPREPLY=( $(compgen -W "--milliseconds -m" -- ${cur}) )
+                return 0
+            fi
+            return 0
+            ;;
+        --milliseconds|-m)
+            # Milliseconds option doesn't take arguments
             return 0
             ;;
         *)
