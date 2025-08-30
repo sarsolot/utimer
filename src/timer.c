@@ -121,7 +121,16 @@ gboolean timer_print (ut_timer *t)
   
   /* Use clock-specific formatting for clock mode */
   if (t->mode == TIMER_MODE_CLOCK)
-    tmpchar = timer_sec_msec_to_clock_string(delta.tv_sec, delta.tv_usec/1000);
+  {
+    if (ut_config.show_milliseconds)
+      tmpchar = g_strdup_printf("%02u:%02u:%02u.%03u",
+                                (delta.tv_sec / 3600) % 24,  /* Hours */
+                                (delta.tv_sec / 60) % 60,    /* Minutes */
+                                delta.tv_sec % 60,           /* Seconds */
+                                delta.tv_usec / 1000);       /* Milliseconds */
+    else
+      tmpchar = timer_sec_msec_to_clock_string(delta.tv_sec, delta.tv_usec/1000);
+  }
   else
     tmpchar = timer_gtvaldiff_to_string(delta);
   

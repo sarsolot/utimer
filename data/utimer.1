@@ -8,6 +8,7 @@
 .RI [\-\-countdown=TIMELENGTH\ |\ \-c\ TIMELENGTH]
 .RI [\-\-stopwatch\ |\ \-s]
 .RI [\-\-clock\ |\ \-k]
+.RI [\-\-milliseconds\ |\ \-m]
 .RI [\-\-quiet\ |\ \-q]
 .RI [\-\-verbose\ |\ \-v]
 .RI [\-\-quit\-with\-success]
@@ -39,7 +40,7 @@ is like a real stopwatch where you can measure time of multiple events, or use i
 
 The
 .B clock
-displays the current time in HH:MM:SS format, updating every second. It reads and displays the system's current time accurately. The clock can be stopped using the 'Q' key.
+displays the current time in HH:MM:SS format, updating every second. It reads and displays the system's current time accurately. With the \-\-milliseconds option, it can also display milliseconds (HH:MM:SS.mmm). The clock can be stopped using the 'Q' key.
 
 .LP 
 .SH "OPTIONS"
@@ -69,11 +70,14 @@ section in
 to read more about how to use the stopwatch.
 .B
 .IP --clock\ |\ \-k
-Shows the current time as a clock in HH:MM:SS format. The clock updates every second by reading the system's current time. Can be stopped using the 'Q' key. See the
+Shows the current time as a clock in HH:MM:SS format. The clock updates every second by reading the system's current time. With \-\-milliseconds, it displays HH:MM:SS.mmm format. Can be stopped using the 'Q' key. See the
 .B Clock
 section in
 .B USAGE
 to read more about how to use the clock.
+.B
+.IP --milliseconds\ |\ \-m
+Show milliseconds in clock mode. When used with \-\-clock, displays time in HH:MM:SS.mmm format instead of HH:MM:SS. This option has no effect with other timer modes as they already display milliseconds.
 .B
 .IP --verbose\ |\ \-v
 Print more information during the program's process. (note that if used with -q, this option is ignored)
@@ -153,7 +157,11 @@ You can use the ENTER key to take measures (like a snapshot) of the elapsed time
 or
 .B utimer -k
 
-When using the clock, it displays the current system time in HH:MM:SS format, updating every second. The clock provides accurate timekeeping by reading the system time at regular intervals. It can be stopped using the 'Q' key or Ctrl+C.
+.B utimer --clock --milliseconds
+or
+.B utimer -k -m
+
+When using the clock, it displays the current system time in HH:MM:SS format, updating every second. When used with the \-\-milliseconds option, it shows HH:MM:SS.mmm format with millisecond precision. The clock provides accurate timekeeping by reading the system time at regular intervals. It can be stopped using the 'Q' key or Ctrl+C.
 
 
 .SH SHORTCUT KEYS

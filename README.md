@@ -1,7 +1,7 @@
 # µTimer (utimer)
 
 µTimer (pronounced "micro-timer") is a command-line multifunction timer for Linux.  
-It supports four modes: **timer**, **countdown**, **stopwatch**, and **clock**, with flexible time input and scripting support.
+It supports four modes: **timer**, **countdown**, **stopwatch**, and **clock**, with flexible time input and optional millisecond precision.
 
 Originally created by Arnaud Soyez, this project is now maintained and modernized by Artur Ladka to support modern Linux systems (GCC 14, GLib 2.84+, etc).
 
@@ -10,7 +10,7 @@ Originally created by Arnaud Soyez, this project is now maintained and modernize
 - Timer: count up to a specified time
 - Countdown: count down from a time to zero
 - Stopwatch: run indefinitely until stopped
-- Clock: display current system time in HH:MM:SS format
+- Clock: display current system time in HH:MM:SS format, optionally with milliseconds
 - Flexible CLI time input (e.g. `1h30m45s300ms`)
 - Quiet mode, test mode, and script-friendly
 - Clean autotools build system with out-of-tree build support
@@ -116,7 +116,10 @@ utimer --stopwatch
 ### Clock mode:
 
 ```bash
-utimer --clock
+utimer --clock              # Shows: 10:21:00
+utimer --clock --milliseconds  # Shows: 10:21:09.405
+# Or use short form:
+utimer -k -m               # Shows: 10:21:09.405
 ```
 
 Valid time suffixes:

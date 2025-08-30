@@ -1,3 +1,13 @@
+2025-08-30  Artur Ladka  <arturladka@gmail.com>
+
+	* Added optional milliseconds display for clock mode (#2)
+	- New --milliseconds/-m option shows time in HH:MM:SS.mmm format
+	- Clock mode without -m: shows HH:MM:SS (e.g., 10:21:00)
+	- Clock mode with -m: shows HH:MM:SS.mmm (e.g., 10:21:09.405)
+	- Preserves existing millisecond display for timer/countdown/stopwatch modes
+	- Updated documentation (README.md, utimer.1 manual page)
+	- Merged latest master fixes including build system improvements
+
 2025-08-29  Artur Ladka  <arturladka@gmail.com>
 
 	* Added clock mode feature (#2)

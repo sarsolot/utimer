@@ -34,10 +34,11 @@ Config            ut_config;
 //~ static    char            **remaining_args;
 static ut_timer        *ttimer;
 static gchar           *timer_info, *countdown_info;
-static gboolean        *stopwatch = FALSE,
-                       *clock_mode = FALSE,
-                       *show_limits = FALSE,
-                       *show_version = FALSE;
+static gboolean        stopwatch = FALSE,
+                       clock_mode = FALSE,
+                       show_milliseconds = FALSE,
+                       show_limits = FALSE,
+                       show_version = FALSE;
 
 static GOptionEntry entries[] = {
   
@@ -76,6 +77,14 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_NONE,
     &(clock_mode),
     N_("show current time as a clock. Use 'Q' key to quit"),
+    NULL
+  },
+  {"milliseconds",
+    'm',
+    0,
+    G_OPTION_ARG_NONE,
+    &(show_milliseconds),
+    N_("show milliseconds in clock mode (--clock)"),
     NULL
   },
   {"verbose",
@@ -279,7 +288,10 @@ int main (int argc, char *argv[])
   
   if (ut_config.debug)
     ut_config.quiet = FALSE;
-  
+
+  /* Copy milliseconds flag to config */
+  ut_config.show_milliseconds = show_milliseconds;
+
   if (timer_info && (countdown_info || stopwatch || clock_mode)
     || countdown_info && (stopwatch || clock_mode)
     || stopwatch && clock_mode)
