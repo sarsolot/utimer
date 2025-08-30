@@ -84,7 +84,7 @@ static GOptionEntry entries[] = {
     0,
     G_OPTION_ARG_NONE,
     &(show_milliseconds),
-    N_("show milliseconds in clock mode (--clock)"),
+    N_("show milliseconds in clock mode (only affects --clock)"),
     NULL
   },
   {"verbose",
