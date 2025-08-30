@@ -316,6 +316,34 @@ static void test_clock_stopwatch_conflict (void)
 }
 
 /**
+ * Tests the clock formatter function directly with various values
+ */
+static void test_clock_formatter_values (void)
+{
+  gchar *s;
+
+  // 00:00:00 without ms
+  s = timer_sec_msec_to_clock_string(0, 0, FALSE);
+  g_assert_cmpstr(s, ==, "00:00:00");
+  g_free(s);
+
+  // 23:59:59 without ms
+  s = timer_sec_msec_to_clock_string(23*3600 + 59*60 + 59, 0, FALSE);
+  g_assert_cmpstr(s, ==, "23:59:59");
+  g_free(s);
+
+  // Wrap >24h: 25:00:00 -> 01:00:00
+  s = timer_sec_msec_to_clock_string(25*3600, 0, FALSE);
+  g_assert_cmpstr(s, ==, "01:00:00");
+  g_free(s);
+
+  // With ms
+  s = timer_sec_msec_to_clock_string(12*3600 + 34*60 + 56, 7, TRUE);
+  g_assert_cmpstr(s, ==, "12:34:56.007");
+  g_free(s);
+}
+
+/**
  * Main tests' Main()
  * Starts the main testing units
  */
@@ -350,6 +378,7 @@ gint main (gint argc, gchar *argv[])
   g_test_add_func ("/Clock/CLI/BasicFormat", test_clock_format_basic);
   g_test_add_func ("/Clock/CLI/MillisecondsFormat", test_clock_format_milliseconds);
   g_test_add_func ("/Clock/CLI/ConflictDetection", test_clock_stopwatch_conflict);
+  g_test_add_func ("/Clock/Format/FormatterValues", test_clock_formatter_values);
 
   // run tests from the suite
   return g_test_run();
