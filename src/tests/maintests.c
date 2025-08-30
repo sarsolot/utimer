@@ -323,22 +323,22 @@ static void test_clock_formatter_values (void)
   gchar *s;
 
   // 00:00:00 without ms
-  s = timer_sec_msec_to_clock_string(0, 0, FALSE);
+  s = timer_clock_string_from_sec_msec(0, 0, FALSE);
   g_assert_cmpstr(s, ==, "00:00:00");
   g_free(s);
 
   // 23:59:59 without ms
-  s = timer_sec_msec_to_clock_string(23*3600 + 59*60 + 59, 0, FALSE);
+  s = timer_clock_string_from_sec_msec(23*3600 + 59*60 + 59, 0, FALSE);
   g_assert_cmpstr(s, ==, "23:59:59");
   g_free(s);
 
   // Wrap >24h: 25:00:00 -> 01:00:00
-  s = timer_sec_msec_to_clock_string(25*3600, 0, FALSE);
+  s = timer_clock_string_from_sec_msec(25*3600, 0, FALSE);
   g_assert_cmpstr(s, ==, "01:00:00");
   g_free(s);
 
   // With ms
-  s = timer_sec_msec_to_clock_string(12*3600 + 34*60 + 56, 7, TRUE);
+  s = timer_clock_string_from_sec_msec(12*3600 + 34*60 + 56, 7, TRUE);
   g_assert_cmpstr(s, ==, "12:34:56.007");
   g_free(s);
 }

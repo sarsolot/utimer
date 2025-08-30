@@ -122,7 +122,7 @@ gboolean timer_print (ut_timer *t)
   /* Use clock-specific formatting for clock mode */
   if (t->mode == TIMER_MODE_CLOCK)
   {
-    tmpchar = timer_sec_msec_to_clock_string(delta.tv_sec, delta.tv_usec/1000, ut_config.show_milliseconds);
+    tmpchar = timer_clock_string_from_sec_msec(delta.tv_sec, delta.tv_usec/1000, ut_config.show_milliseconds);
   }
   else
     tmpchar = timer_gtvaldiff_to_string(delta);
@@ -362,9 +362,9 @@ gchar* timer_sec_msec_to_string(guint sec, guint msec)
 }
 
 /**
- * Return clock-formatted string for the given time (HH:MM:SS).
+ * Return clock-formatted string for the given time (HH:MM:SS or HH:MM:SS.mmm).
  */
-gchar* timer_sec_msec_to_clock_string(guint sec, guint msec, gboolean show_milliseconds)
+gchar* timer_clock_string_from_sec_msec(guint sec, guint msec, gboolean show_milliseconds)
 {
   g_assert (msec < 1000);
   guint hours = sec / 3600;
