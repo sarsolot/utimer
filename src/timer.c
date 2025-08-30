@@ -374,7 +374,6 @@ gchar* timer_sec_msec_to_string(guint sec, guint msec)
 gchar* timer_sec_msec_to_clock_string(guint sec, guint msec)
 {
   g_assert (msec < 1000);
-  guint total_sec = sec;
   guint hours = sec / 3600;
   sec -= hours * 3600;
   guint minutes = sec / 60;
