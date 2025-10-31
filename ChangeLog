@@ -1,3 +1,12 @@
+2025-10-31  Artur Ladka  <arturladka@gmail.com>
+
+	* Release version 0.5-2
+	- All changes from previous commits now included in stable release
+	- Fixed critical GLib source removal bug
+	- Added two major new features (clock mode and bash autocompletion)
+	- Improved testing and CI/CD infrastructure
+	- Enhanced build system and distribution process
+
 2025-08-30  Artur Ladka  <arturladka@gmail.com>
 
 	* Added optional milliseconds display for clock mode (#2)
