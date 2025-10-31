@@ -16,14 +16,16 @@ Vcs-Browser: https://github.com/sarsolot/utimer
 Package: utimer
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: multifunction timer: regular timer, countdown, and stopwatch
+Description: multifunction timer: timer, countdown, stopwatch, and clock
  µTimer (or "uTimer") is a multifunction timer with command-line interface
- supporting three modes: timer, countdown, and stopwatch.
+ supporting four modes: timer, countdown, stopwatch, and clock.
  .
  Features:
   * Timer: count up to a specified time
   * Countdown: count down from a time to zero
   * Stopwatch: run indefinitely until stopped
+  * Clock: display current system time with optional milliseconds
+  * Bash autocompletion for all commands and options
   * Flexible CLI time input (e.g. 1h30m45s300ms)
   * Quiet mode, test mode, and script-friendly
   * Modern GCC and GLib compatibility

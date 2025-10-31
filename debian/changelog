@@ -1,3 +1,19 @@
+utimer (0.5-2ubuntu1~ppa1) plucky; urgency=medium
+
+  * Add clock mode feature that displays current system time (--clock/-k)
+  * Add optional milliseconds display for clock mode (--milliseconds/-m)
+  * Add bash autocompletion support for all utimer commands and options
+  * Fix GLib source removal error by initializing timer_print_source_id
+  * Add release.sh script for creating distribution tarballs
+  * Add GitHub Actions CI workflow with automated testing
+  * Convert to minimal source approach for cleaner distribution
+  * Fix EXTRA_DIST to reference README.md instead of README
+  * Re-enable and fix all test suite tests (all 5+ tests passing)
+  * Add comprehensive CLI tests for clock mode functionality
+  * Improve code consistency by unifying clock formatting functions
+
+ -- Artur Ladka (sarsolot) <arturladka@gmail.com>  Fri, 31 Oct 2025 20:57:11 +0000
+
 utimer (0.5-1ubuntu1~ppa1) plucky; urgency=medium
 
   * New maintainer (Closes: no bug filed yet)

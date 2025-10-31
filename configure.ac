@@ -1,4 +1,4 @@
-AC_INIT([utimer], [0.5-1], [<https://github.com/sarsolot/utimer/issues>])
+AC_INIT([utimer], [0.5-2], [<https://github.com/sarsolot/utimer/issues>])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 # Create m4 directory for macros
